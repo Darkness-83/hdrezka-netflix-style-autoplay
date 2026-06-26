@@ -5,7 +5,7 @@
 // @version      2.2
 // @description  Цельные зоны на 100% высоты с умной обрезкой области клика на 15% снизу, Alt+Стрелки и уведомления о серии!
 // @description:en 100% height zones with safe click boundaries (bottom 15% free) over player controls, Alt+Arrows & notifications.
-// @author       Digital Dark (совместно с AI)
+// @author       Darkness-83 (совместно с AI)
 // @include      /^https?://([^/]+\.)?(hdrezka|rezka|kinopub|hdbaza)[^/]*\./
 // @run-at       document-end
 // @grant        none
