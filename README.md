@@ -23,7 +23,7 @@
 * ## 🚀 Как установить
 
 <details>
-<summary><b>🛠 Нажмите, чтобы развернуть инструкцию / Click to expand instructions</b></summary>
+<summary><b>🛠 Нажмите, чтобы развернуть инструкцию</b></summary>
 
 1. Установите расширение [Tampermonkey](https://tampermonkey.net) для вашего браузера.
 2. [**Нажми здесь, чтобы установить этот скрипт**](https://raw.githubusercontent.com/Darkness-83/hdrezka-netflix-style-autoplay/main/script.user.js).
@@ -58,7 +58,7 @@ This script is made for ultimate comfort lovers 😎. It upgrades your HDRezka p
 ## 🚀 Как установить / How to install
 
 <details>
-<summary><b>🛠 Нажмите, чтобы развернуть инструкцию / Click to expand instructions</b></summary>
+<summary><b>🛠 Click to expand instructions</b></summary>
 
 1. Install [Tampermonkey](https://tampermonkey.net) for your browser.
 2. [**Click here to install this script**](https://raw.githubusercontent.com/Darkness-83/hdrezka-netflix-style-autoplay/main/script.user.js).
