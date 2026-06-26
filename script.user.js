@@ -9,7 +9,7 @@
 // @include      /^https?://([^/]+\.)?(hdrezka|rezka|kinopub|hdbaza)[^/]*\./
 // @run-at       document-end
 // @grant        none
-// @license      MIT
+// @license      GPL-3.0
 // ==/UserScript==
 
 (function() {
