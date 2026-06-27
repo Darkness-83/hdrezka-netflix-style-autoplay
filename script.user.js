@@ -137,7 +137,7 @@
             }
         }
 
-        // КЛАВИША ENTER: Разворачивает на весь экран СТРОГО САМ ТЕГ ВИДЕО!
+        // ХОТКЕЙ: Разворачивает на весь экран СТРОГО САМ ТЕГ ВИДЕО
         if (e.keyCode === 13 && !e.shiftKey && !e.altKey && !e.ctrlKey && !e.metaKey) {
             e.preventDefault();
             e.stopPropagation();
@@ -146,20 +146,17 @@
             const fullscreenEl = document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement;
 
             if (fullscreenEl) {
-                // Если какой-то элемент уже в фуллскрине — выходим наружу
                 const exitFS = document.exitFullscreen || document.webkitExitFullscreen || document.mozCancelFullScreen;
                 if (exitFS) exitFS.call(document);
             } else {
-                // Находим живой тег самого видеокадра фильма
                 const nativeVideo = document.querySelector('video:not(#ps-overlay-wrap video)');
                 if (nativeVideo) {
-                    // Разворачиваем только само чистое кино на весь монитор!
                     const reqFS = nativeVideo.requestFullscreen || nativeVideo.webkitRequestFullScreen || nativeVideo.mozRequestFullScreen;
                     if (reqFS) reqFS.call(nativeVideo);
                 }
             }
         }
-    }, true); // Флаг true перехватывает нажатия раньше всех скриптов сайта
+    }, true); // Flag true перехватывает нажатия раньше всех скриптов сайта
 })();
 (function() {
     'use strict';
@@ -237,7 +234,7 @@
         }, 4000);
     }
 
-    // Бронебойный перехват клика
+    // Перехват клика
     function handleZoneClick(e, direction) {
         e.stopPropagation();
         e.preventDefault();
