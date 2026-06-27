@@ -13,6 +13,7 @@
 Этот скрипт создан для истинных ценителей комфорта 😎. Он превращает плеер HDRezka в прокачанную премиум-платформу уровня **Netflix**! Больше никакого лишнего напряга. Только чистый кайф от просмотра!
 
 ### 🔥 Что умеет этот скрипт:
+* ⌨️ **Fullscreen в один удар:** Вообще лень тянуться к мышке? Нажимай клавишу \Enter` — и скрипт мгновенно распахнёт чистое кино на весь экран (а повторное нажатие вернёт всё назад)!` Добавлено в версии 2.3 🆕
 * ⌨ **Клавиатурный кураж:** Вообще лень двигать рукой? Нажимай `Alt + Стрелка Вправо` (следующая серия) или `Alt + Стрелка Влево` (предыдущая). Скрипт мгновенно перехватит команду и включит нужный эпизод!
 * 🌐 **Netflix-шторки:** По бокам плеера на всю высоту кадра появляются огромные невидимые зоны переключения серий. Кликнул слева — ушел на прошлую серию `◀`, кликнул справа — полетел на следующую `▶`. Промахнуться в темноте просто невозможно!
 * 🎨 **Умный PRO-градиент:** Когда ты просто смотришь кино, шторки абсолютно прозрачные. Но стоит подвести мышку к краю — и экран элегантно заливается глубоким киношным затемнением, проявляя управление.
@@ -46,6 +47,7 @@
 This script is made for ultimate comfort lovers 😎. It upgrades your HDRezka player into a premium **Netflix-like** platform! No more useless friction. Just pure, uninterrupted binge-watching!
 
 ### 🔥 Top Features:
+* ⌨️ **One-Hit Fullscreen:** Too lazy to grab your mouse? Just press the \Enter` key — and the script will instantly stretch the pure movie layout to full screen (and pressing it again brings it right back)!` Added in version 2.3 🆕
 * ⌨ **Keyboard Master:** Lazy to move your hands? Just press `Alt + Right Arrow` (next episode) or `Alt + Left Arrow` (prev episode) to switch instantly!
 * 🌐 **Netflix-Style Side Zones:** Giant, invisible click zones span the entire height of the player. Click left for the previous episode `◀`, click right to jump to the next one `▶`. Impossible to miss in the dark!
 * 🎨 **Sleek PRO Gradient:** The edges stay completely transparent while you watch. Hover near the side, and a beautiful cinema-grade dark gradient smoothly fades in.
