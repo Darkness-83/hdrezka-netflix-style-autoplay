@@ -2,7 +2,7 @@
 // @name         HDREZKA PRO CINEMA ZONES: Автоплей и Хоткеи
 // @name:en      HDRezka PRO Cinema Zones: AutoPlay & Hotkeys
 // @namespace    http://tampermonkey.net
-// @version      2.2
+// @version      2.3
 // @description  Цельные зоны на 100% высоты с умной обрезкой области клика на 15% снизу, Alt+Стрелки и уведомления о серии!
 // @description:en 100% height zones with safe click boundaries (bottom 15% free) over player controls, Alt+Arrows & notifications.
 // @author       Darkness-83 (совместно с AI)
@@ -112,35 +112,55 @@
         setTimeout(() => { notify.remove(); }, 1900);
     };
 
-    // Хоткеи Alt + Стрелки (продолжают триггерить переключение серий без мышки)
+    // Общий обработчик горячих клавиш
     document.addEventListener('keydown', function(e) {
+        // ЖЕЛЕЗНЫЙ ПРЕДОХРАНИТЕЛЬ: Если фокус в поле ввода (поиск, комменты) или тексте — полностью выключаем хоткеи!
+        const activeEl = document.activeElement;
+        if (activeEl && (
+            activeEl.tagName === 'INPUT' ||
+            activeEl.tagName === 'TEXTAREA' ||
+            activeEl.isContentEditable
+        )) {
+            return; // Даем пользователю спокойно писать текст
+        }
+
+        // Хоткеи Alt + Стрелки (Переключение серий через симуляцию клика по триггерам Части 2)
         if (e.altKey) {
-            if (e.keyCode === 39) {
+            if (e.keyCode === 39) { // Стрелка Вправо
                 e.preventDefault(); e.stopPropagation(); e.stopImmediatePropagation();
                 const zone = document.getElementById('rezka-zone-next');
                 if (zone) { const trigger = zone.querySelector('.rezka-click-target'); if (trigger) trigger.click(); }
-            } else if (e.keyCode === 37) {
+            } else if (e.keyCode === 37) { // Стрелка Влево
                 e.preventDefault(); e.stopPropagation(); e.stopImmediatePropagation();
                 const zone = document.getElementById('rezka-zone-prev');
                 if (zone) { const trigger = zone.querySelector('.rezka-click-target'); if (trigger) trigger.click(); }
             }
         }
-    }, true);
-})();
-// ==UserScript==
-// @name         HDREZKA PRO CINEMA ZONES: Автоплей и Хоткеи (Движок)
-// @name:en      HDRezka PRO Cinema Zones: AutoPlay & Hotkeys (Engine)
-// @namespace    http://tampermonkey.net
-// @version      26.2
-// @description  Часть 2: Инжектор боковых зон, динамический расчет 15% высоты от тега video и долбилка автоплея.
-// @description:en Part 2: Side zones injection, dynamic 15% height calculation from video element and forced autoplay.
-// @author       Digital Dark (совместно с AI)
-// @include      /^https?://([^/]+\.)?(hdrezka|rezka|kinopub|hdbaza)[^/]*\./
-// @run-at       document-end
-// @grant        none
-// @license      MIT
-// ==/UserScript==
 
+        // КЛАВИША ENTER: Разворачивает на весь экран СТРОГО САМ ТЕГ ВИДЕО!
+        if (e.keyCode === 13 && !e.shiftKey && !e.altKey && !e.ctrlKey && !e.metaKey) {
+            e.preventDefault();
+            e.stopPropagation();
+            e.stopImmediatePropagation();
+
+            const fullscreenEl = document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement;
+
+            if (fullscreenEl) {
+                // Если какой-то элемент уже в фуллскрине — выходим наружу
+                const exitFS = document.exitFullscreen || document.webkitExitFullscreen || document.mozCancelFullScreen;
+                if (exitFS) exitFS.call(document);
+            } else {
+                // Находим живой тег самого видеокадра фильма
+                const nativeVideo = document.querySelector('video:not(#ps-overlay-wrap video)');
+                if (nativeVideo) {
+                    // Разворачиваем только само чистое кино на весь монитор!
+                    const reqFS = nativeVideo.requestFullscreen || nativeVideo.webkitRequestFullScreen || nativeVideo.mozRequestFullScreen;
+                    if (reqFS) reqFS.call(nativeVideo);
+                }
+            }
+        }
+    }, true); // Флаг true перехватывает нажатия раньше всех скриптов сайта
+})();
 (function() {
     'use strict';
 
@@ -187,7 +207,7 @@
 
         if (episodes[targetIndex]) {
             const episodeText = episodes[targetIndex].textContent.trim();
-            // Вызываем уведомление о серии из Части 1
+            // Вызываем глобальное уведомление о серии из Части 1
             if (window.showRezkaNotification) window.showRezkaNotification(episodeText);
 
             episodes[targetIndex].click();
@@ -264,14 +284,14 @@
                 mainPlayer.appendChild(btnNext);
             }
 
-            // МАГИЯ ПРОЦЕНТОВ ПОД ЛЮБОЙ МОНИТОР: Считываем размеры живого кадра видео
+            // МАТЕМАТИКА ПРОЦЕНТОВ: Считываем размеры живого кадра видео для безопасного клика
             const video = mainPlayer.querySelector('video:not(#ps-overlay-wrap video)');
             if (video) {
                 const videoHeight = video.offsetHeight;
                 const videoTop = video.offsetTop;
 
                 if (videoHeight > 100) {
-                    // Клик занимает ровно 85% от высоты самого видеоряда сверху, нижние 15% кадра свободны для панели!
+                    // Клик занимает ровно 85% от высоты самого видеоряда сверху, нижние 15% кадра ВСЕГДА свободны для панели!
                     const clickHeight = videoHeight * 0.85;
 
                     clickTargetPrev.style.top = `${videoTop}px`;
